@@ -1,19 +1,16 @@
-from dataclasses import dataclass, field
-from datetime import datetime, date, timedelta
-from typing import ClassVar
+import datetime
+from app.services.util import room_not_available_error
 
-from app.services.util import (generate_unique_id, date_lower_than_today_error,
-    reservation_not_found_error, guest_not_found_error, room_not_available_error,
-    room_not_found_error, room_already_exists_error)
+class Room:
+    def __init__(self, number: int, room_type: str, price_per_night: float):
 
-
-# TODO: Implement Guest class here
-
-
-# TODO: Implement Reservation class here
-
-
-# TODO: Implement Room class here
-
-
-# TODO: Implement Hotel class here
+        self.number = number
+        self.type = room_type
+        self.price_per_night = price_per_night
+        self.availability = {}
+        self.init_availability()
+    def init_availability(self):
+        start_date = datetime.date.today()
+        for i in range(365):
+            current_date = start_date + datetime.timedelta(days=i)
+            self.availability[current_date] = None
