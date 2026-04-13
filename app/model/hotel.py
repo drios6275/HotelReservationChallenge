@@ -14,3 +14,4 @@ class Room:
         for i in range(365):
             current_date = start_date + datetime.timedelta(days=i)
             self.availability[current_date] = None
+            #ggj
